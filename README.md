@@ -1,6 +1,6 @@
 # ofxAdjustH
 
-[adjust.h](https://github.com/bi3mer/adjust.h) for openFrameworks
+[adjust.h](https://github.com/bi3mer/adjust.h) for openFrameworks (tested on oF 0.12.0)
 
 You can interactively change values (hot reload) **without recompiling files** on realtime.
 
@@ -48,3 +48,4 @@ void ofApp::keyPressed(int key){
 
 
 - [adjust.h](https://github.com/bi3mer/adjust.h) : [MIT License, Copyright (c) 2025 Colan Biemer](https://github.com/bi3mer/adjust.h/blob/main/LICENSE) 
+
