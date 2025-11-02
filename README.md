@@ -2,7 +2,11 @@
 
 [adjust.h](https://github.com/bi3mer/adjust.h) for openFrameworks
 
-You can interactively change values without recompiling on realtime.
+You can interactively change values (hot reload) **without recompiling files** on realtime.
+
+Please see https://www.youtube.com/watch?v=9eIXOygjPvw about adjust.h (introduction movie by colan biemer)
+
+## Features
 
 - added `ADJUST_SET_` macros for more oF friendly
 
@@ -41,5 +45,6 @@ void ofApp::keyPressed(int key){
 ```
 
 ## License
+
 
 - [adjust.h](https://github.com/bi3mer/adjust.h) : [MIT License, Copyright (c) 2025 Colan Biemer](https://github.com/bi3mer/adjust.h/blob/main/LICENSE) 
