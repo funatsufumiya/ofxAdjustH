@@ -12,7 +12,7 @@ Please see https://www.youtube.com/watch?v=9eIXOygjPvw about adjust.h (introduct
 
 ## Example
 
-see [./example/src/ofApp.cpp](./example/src/ofApp.cpp]) for detail.
+see [example/src/ofApp.cpp](example/src/ofApp.cpp) for detail.
 
 ```cpp
 #include "ofxAdjustH.h"
