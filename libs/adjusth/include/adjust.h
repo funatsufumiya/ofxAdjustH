@@ -215,6 +215,12 @@ SOFTWARE.
 #define ADJUST_VAR_FLOAT(name, val) float name = val
 #define ADJUST_VAR_STRING(name, val) char *name = val
 
+#define ADJUST_SET_BOOL(name, val) name = val
+#define ADJUST_SET_CHAR(name, val) name = val
+#define ADJUST_SET_INT(name, val) name = val
+#define ADJUST_SET_FLOAT(name, val) name = val
+#define ADJUST_SET_STRING(name, val) *name = val
+
 #define adjust_register_global_bool(name) ()
 #define adjust_register_global_char(name) ()
 #define adjust_register_global_float(name) ()
@@ -509,6 +515,34 @@ static void _adjust_register(void *val, _ADJUST_TYPE type,
         _adjust_register(&name, _ADJUST_STRING, __FILE__, __LINE__);           \
     } while (0)
 
+
+#define ADJUST_SET_FLOAT(name, val)                                            \
+    name = val;                                                                \
+    _adjust_register(&name, _ADJUST_FLOAT, __FILE__, __LINE__)
+
+#define ADJUST_SET_INT(name, val)                                              \
+    name = val;                                                                \
+    _adjust_register(&name, _ADJUST_INT, __FILE__, __LINE__)
+
+#define ADJUST_SET_CHAR(name, val)                                             \
+    name = val;                                                                \
+    _adjust_register(&name, _ADJUST_CHAR, __FILE__, __LINE__)
+
+#define ADJUST_SET_BOOL(name, val)                                             \
+    name = val;                                                                \
+    _adjust_register(&name, _ADJUST_BOOL, __FILE__, __LINE__)
+
+#define ADJUST_SET_STRING(name, val)                                           \
+    *name = NULL;                                                              \
+    do                                                                         \
+    {                                                                          \
+        const char *_temp = val;                                               \
+        size_t _len = strlen(_temp) + 1;                                       \
+        name = malloc(sizeof(char) * _len);                                    \
+        memcpy(name, _temp, _len);                                             \
+        _adjust_register(&name, _ADJUST_STRING, __FILE__, __LINE__);           \
+    } while (0)
+
 /* Declarations for global adjustable data */
 static void _adjust_register_global(void *ref, _ADJUST_TYPE type,
                                     const char *file_name,
@@ -603,7 +637,7 @@ static void _adjust_register_global(void *ref, _ADJUST_TYPE type,
     } while (0)
 
 /* Declarations for temporary data */
-inline void *_adjust_register_and_get(const _ADJUST_TYPE type, void *val,
+static void *_adjust_register_and_get(const _ADJUST_TYPE type, void *val,
                                const char *file_name, const size_t line_number)
 {
     _ADJUST_ENTRY *adjustables;
@@ -774,6 +808,21 @@ static void adjust_update(void)
             if (strstr(buffer, "ADJUST_VAR_") ||
                 strstr(buffer, "ADJUST_CONST_") ||
                 strstr(buffer, "ADJUST_GLOBAL_"))
+            {
+                value_start = strchr(buffer, ',');
+                if (value_start == NULL)
+                {
+                    fprintf(stderr,
+                            "Error: no comma found in ADJUST macro: %s:%lu\n",
+                            af.file_name, e.line_number);
+                    fclose(file);
+                    exit(1);
+                }
+                ++value_start; /* skip the
+                                  ',' */
+            }
+            else if (
+                strstr(buffer, "ADJUST_SET_"))
             {
                 value_start = strchr(buffer, ',');
                 if (value_start == NULL)

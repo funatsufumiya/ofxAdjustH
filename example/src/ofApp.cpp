@@ -6,6 +6,11 @@
 void ofApp::setup(){
     ofLogToConsole();
     ofxAdjustH::setup();
+
+    ADJUST_SET_FLOAT(x, 100); // modify this line, save file and press R on your running app!
+	ADJUST_SET_FLOAT(y, 100); // modify this line, save file and press R on your running app!
+    ADJUST_SET_FLOAT(w, 200); // modify this line, save file and press R on your running app!
+	ADJUST_SET_FLOAT(h, 200); // modify this line, save file and press R on your running app!
 }
 
 //--------------------------------------------------------------
@@ -15,14 +20,8 @@ void ofApp::update(){
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-    ADJUST_CONST_FLOAT(w1, 200);
-    ADJUST_CONST_FLOAT(h1, 200);
-
     ofSetColor(255, 0, 0);
-    ofDrawRectangle(0, 0, w1, h1);
-
-    ofSetColor(0, 255, 0);
-    ofDrawEllipse(100, 100, 200, 200);
+    ofDrawEllipse(x, y, w, h);
 }
 
 //--------------------------------------------------------------
