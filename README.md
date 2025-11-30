@@ -44,8 +44,13 @@ void ofApp::keyPressed(int key){
 }
 ```
 
+## Notes
+
+- You maybe can automatically detect file change using [`ofxWatchFile`](https://github.com/nariakiiwatani/ofxWatchFile) or etc.
+
 ## License
 
 
 - [adjust.h](https://github.com/bi3mer/adjust.h) : [MIT License, Copyright (c) 2025 Colan Biemer](https://github.com/bi3mer/adjust.h/blob/main/LICENSE) 
+
 
